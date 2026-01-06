@@ -1,0 +1,2 @@
+# Ignore all output folder in any subdirectory
+**/output/**
