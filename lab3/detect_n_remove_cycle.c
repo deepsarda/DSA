@@ -83,9 +83,11 @@ int main()
 
     fifth->data = 5;
 
-    fifth->next = third; // Creates a cycle
-
     printf("List before removing cycle:\n");
+    display_list(head);
+    printf("-> 3\n");
+
+    fifth->next = third; // Creates a cycle after printing
 
     head = detect_and_remove_cycle(head);
 

@@ -41,6 +41,25 @@ Node *reverse_in_groups(Node *head, int k)
     return previous;
 }
 
+Node *insert_at_tail(Node *head, int *data)
+{
+    Node *new_node = create_node(NULL, data);
+
+    if (head == NULL)
+        return new_node;
+
+    Node *current = head;
+
+    while (current->next != NULL)
+    {
+        current = current->next;
+    }
+
+    current->next = new_node;
+
+    return head;
+}
+
 Node *display_list(Node *head)
 {
     Node *current = head;

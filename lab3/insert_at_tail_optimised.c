@@ -47,9 +47,9 @@ int main()
     while (1)
     {
 
-        printf("1. Insert node at end.");
-        printf("2. Display list.");
-        printf("3. Exit.");
+        printf("1. Insert node at end.\n");
+        printf("2. Display list.\n");
+        printf("3. Exit.\n");
 
         int choice;
         printf("\nEnter your choice: ");
