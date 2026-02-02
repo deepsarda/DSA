@@ -94,6 +94,7 @@ int main()
 {
     Node *head = NULL;
     Node *original_head = NULL;
+    Node *cloned = NULL;
 
     while (1)
     {
@@ -167,11 +168,8 @@ int main()
 
         case 3:
         {
-            Node *cloned = clone_linked_list(head);
+            cloned = clone_linked_list(head);
             printf("List cloned successfully.\n");
-            // Store cloned list for later display
-            // Note: We're overwriting head here, so save original first
-            head = cloned;
             break;
         }
 
@@ -181,7 +179,7 @@ int main()
 
         case 5:
         {
-            printf("For full functionality, display cloned list at case 4.\n");
+            display_list(cloned);
             break;
         }
 

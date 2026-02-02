@@ -58,46 +58,38 @@ Node *free_list(Node *head)
 
 int main()
 {
-    while (1)
-    {
-        printf("1. Add element at head.\n");
-        printf("2. Check if it is a palindrome.\n");
-        printf("3. Display list.\n");
-        printf("4. Exit.\n");
-        printf("Enter your choice: ");
-        int choice;
-        scanf("%d", &choice);
+    Node *common1 = create_node(30);
+    Node *common2 = create_node(40);
+    Node *common3 = create_node(50);
 
-        Node *head = NULL;
+    common1->next = common2;
+    common2->next = common3;
 
-        switch (choice)
-        {
-        case 1:
-            int data;
-            printf("Enter data (integer): ");
-            scanf("%d", &data);
-            Node *new_node = create_node(data);
-            new_node->next = head;
-            head = new_node;
-            break;
+    Node *headA = create_node(10);
+    Node *temp = create_node(20);
+    headA->next = temp;
+    temp->next = common1;
 
-        case 2:
-            int result = check_palindrome(head);
-            if (result)
-                printf("The linked list is a palindrome.\n");
-            else
-                printf("The linked list is not a palindrome.\n");
+    Node *headB = create_node(100);
+    Node *temp2 = create_node(200);
+    headB->next = temp2;
+    temp2->next = common1;
 
-        case 3:
-            display_list(head);
-            break;
+    printf("List A: ");
+    display_list(headA);
+    printf("List B: ");
+    display_list(headB);
 
-        case 4:
-            head = free_list(head);
-            return;
+    Node *intersection = find_intersection(headA, headB);
+    if (intersection != NULL)
+        printf("Intersection found at data: %d\n", intersection->data);
+    else
+        printf("No intersection found.\n");
 
-        default:
-            printf("Invalid choice. Please try again.\n");
-        }
-    }
+    free(headA->next);
+    free(headA);
+    free(headB->next);
+    free(headB);
+
+    return 0;
 }

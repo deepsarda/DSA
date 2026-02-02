@@ -58,6 +58,9 @@ Node *free_list(Node *head)
 
 int main()
 {
+
+    Node *head = NULL;
+
     while (1)
     {
         printf("1. Add element at head.\n");
@@ -67,8 +70,6 @@ int main()
         printf("Enter your choice: ");
         int choice;
         scanf("%d", &choice);
-
-        Node *head = NULL;
 
         switch (choice)
         {
@@ -99,7 +100,7 @@ int main()
 
         case 4:
             head = free_list(head);
-            return;
+            return 0;
 
         default:
             printf("Invalid choice. Please try again.\n");

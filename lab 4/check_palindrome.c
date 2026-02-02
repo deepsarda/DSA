@@ -15,47 +15,61 @@ Node *create_node(int data)
     return new_node;
 }
 
+Node *reverse_list(Node *head)
+{
+    Node *prev = NULL;
+    Node *current = head;
+    Node *next = NULL;
+
+    while (current != NULL)
+    {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+
+    return prev;
+}
+
 int check_palindrome(Node *head)
 {
+    if (head == NULL || head->next == NULL)
+        return 1; // Empty or single node is palindrome
+
     Node *slow = head;
     Node *fast = head;
-    Node *prev = NULL;
-    Node *next = NULL;
 
     // Find the middle of the linked list
     while (fast != NULL && fast->next != NULL)
     {
         fast = fast->next->next;
-        next = slow->next;
-        slow->next = prev;
-        prev = slow;
-        slow = next;
+        slow = slow->next;
     }
 
-    Node *second_half = NULL;
-    if (fast != NULL) // Odd number of elements
-    {
-        second_half = slow->next;
-    }
-    else // Even number of elements
-    {
-        second_half = slow;
-    }
-
-    Node *first_half = prev;
+    // Reverse the second half
+    Node *second_half = reverse_list(slow);
+    Node *second_half_head = second_half; // Keep reference to restore later
 
     // Compare the two halves
-    while (first_half != NULL && second_half != NULL)
+    Node *first = head;
+    int is_palindrome = 1;
+
+    while (second_half != NULL)
     {
-        if (first_half->data != second_half->data)
+        if (first->data != second_half->data)
         {
-            return 0; // Not a palindrome
+            is_palindrome = 0;
+            break;
         }
-        first_half = first_half->next;
+        first = first->next;
         second_half = second_half->next;
     }
 
-    return 1; // Is a palindrome
+    // Restore the second half by reversing it back
+    reverse_list(second_half_head);
+
+    return is_palindrome;
 }
 
 Node *display_list(Node *head)
@@ -87,6 +101,9 @@ Node *free_list(Node *head)
 
 int main()
 {
+
+    Node *head = NULL;
+
     while (1)
     {
         printf("1. Add element at head.\n");
@@ -96,9 +113,6 @@ int main()
         printf("Enter your choice: ");
         int choice;
         scanf("%d", &choice);
-
-        Node *head = NULL;
-
         switch (choice)
         {
         case 1:
@@ -116,6 +130,7 @@ int main()
                 printf("The linked list is a palindrome.\n");
             else
                 printf("The linked list is not a palindrome.\n");
+            break;
 
         case 3:
             display_list(head);
@@ -123,7 +138,7 @@ int main()
 
         case 4:
             head = free_list(head);
-            return;
+            return 0;
 
         default:
             printf("Invalid choice. Please try again.\n");

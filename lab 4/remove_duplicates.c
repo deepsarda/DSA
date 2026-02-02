@@ -35,6 +35,8 @@ Node *remove_duplicates(Node *head)
 
         read = read->next;
     }
+
+    return head;
 }
 
 Node *display_list(Node *head)
@@ -66,6 +68,8 @@ Node *free_list(Node *head)
 
 int main()
 {
+    Node *head = NULL;
+
     while (1)
     {
         printf("1. Add element at head.\n");
@@ -76,11 +80,10 @@ int main()
         int choice;
         scanf("%d", &choice);
 
-        Node *head = NULL;
-
         switch (choice)
         {
         case 1:
+        {
             int data;
             printf("Enter data (integer): ");
             scanf("%d", &data);
@@ -88,6 +91,7 @@ int main()
             new_node->next = head;
             head = new_node;
             break;
+        }
 
         case 2:
             head = remove_duplicates(head);
@@ -99,7 +103,7 @@ int main()
 
         case 4:
             head = free_list(head);
-            return;
+            return 0;
 
         default:
             printf("Invalid choice. Please try again.\n");

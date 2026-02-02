@@ -16,21 +16,27 @@ Node *create_node(int data)
 
 Node *merge_sorted_lists(Node *heads[], int k)
 {
-    Node *current[] = heads;
-    Node *sorted = current[0];
-    Node *head = current[0];
+    if (k == 0 || heads[0] == NULL)
+        return NULL;
+
+    Node *head = heads[0];
+    Node *sorted = head;
+    Node **current = (Node **)malloc(k * sizeof(Node *));
+    for (int i = 0; i < k; i++)
+    {
+        current[i] = heads[i];
+    }
 
     current[0] = current[0]->next;
 
     while (1)
     {
-
         int found_non_empty = 0;
         int i;
-        Node *min;
-        int min_index;
+        Node *min = NULL;
+        int min_index = -1;
 
-        // Do the check here for clarity
+        // Find the first non-empty list
         for (i = 0; i < k; i++)
         {
             if (current[i] != NULL)
@@ -43,8 +49,12 @@ Node *merge_sorted_lists(Node *heads[], int k)
         }
 
         if (!found_non_empty)
+        {
+            free(current);
             return head;
+        }
 
+        // Find the minimum among remaining
         for (; i < k; i++)
         {
             if (current[i] != NULL && current[i]->data < min->data)
@@ -60,6 +70,7 @@ Node *merge_sorted_lists(Node *heads[], int k)
         current[min_index] = min->next;
     }
 
+    free(current);
     return head;
 }
 
@@ -125,13 +136,8 @@ int main()
     Node *merged_head = merge_sorted_lists(heads, k);
     printf("Merged sorted list:\n");
     display_list(merged_head);
-    
+
     merged_head = free_list(merged_head);
 
-    // Free individual lists
-    for (i = 0; i < k; i++)
-    {
-        heads[i] = free_list(heads[i]);
-    }
     return 0;
 }
