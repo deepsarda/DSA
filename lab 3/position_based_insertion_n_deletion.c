@@ -87,7 +87,6 @@ Node *display_list(Node *head)
     return head;
 }
 
-
 int main()
 {
     Node *head = NULL;

@@ -103,7 +103,7 @@ Node *delete_by_position(Node *head, int position)
     return head;
 }
 
-Node *search(Node *head, void *data)
+int search(Node *head, int data)
 {
     Node *current = head;
 
@@ -111,12 +111,12 @@ Node *search(Node *head, void *data)
     {
         if (current->data == data)
         {
-            return current;
+            return 1;
         }
         current = current->next;
     }
 
-    return NULL;
+    return 0;
 }
 
 Node *reverse(Node *head)
@@ -264,9 +264,9 @@ int main()
         }
         case 5:
         {
-            Node *found = search(head, data);
+            int found = search(head, data);
             if (found)
-                printf("Data found: %d\n", *(int *)found->data);
+                printf("Data found\n");
             else
                 printf("Data not found.\n");
             free(data);
