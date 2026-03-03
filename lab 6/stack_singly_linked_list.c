@@ -92,7 +92,6 @@ void display(Stack *s)
     printf("NULL\n");
 }
 
-// Menu-driven main function
 int main()
 {
     Stack *s = create_stack();
@@ -100,7 +99,7 @@ int main()
 
     while (1)
     {
-        printf("\nMenu:\n");
+        
         printf("1. Push\n");
         printf("2. Pop\n");
         printf("3. Peek\n");

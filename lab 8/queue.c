@@ -11,8 +11,6 @@ typedef struct Node
 Node *front = NULL;
 Node *rear = NULL;
 
-/* ---------------- BASIC QUEUE ---------------- */
-
 Node *createNode(int value)
 {
     Node *n = (Node *)malloc(sizeof(Node));
@@ -76,8 +74,6 @@ void display()
     printf("\n");
 }
 
-/* ---------------- 1. REVERSE USING STACK ---------------- */
-
 void reverseUsingStack()
 {
     if (isEmpty())
@@ -96,8 +92,6 @@ void reverseUsingStack()
     printf("Queue reversed using stack.\n");
 }
 
-/* ---------------- REVERSE USING RECURSION ---------------- */
-
 void reverseRecursion()
 {
     int value;
@@ -107,8 +101,6 @@ void reverseRecursion()
     reverseRecursion();
     enqueue(value);
 }
-
-/* ---------------- 2. COUNT ELEMENTS ---------------- */
 
 int countElements()
 {
@@ -121,8 +113,6 @@ int countElements()
     }
     return count;
 }
-
-/* ---------------- 3. FIND MAX AND MIN ---------------- */
 
 void findMaxMin()
 {
@@ -149,8 +139,6 @@ void findMaxMin()
     printf("Min = %d\n", min);
 }
 
-/* ---------------- 4. PALINDROME USING DEQUE ---------------- */
-
 int isPalindrome(char str[])
 {
     int left = 0;
@@ -166,16 +154,12 @@ int isPalindrome(char str[])
     return 1;
 }
 
-/* ---------------- FREE QUEUE ---------------- */
-
 void freeQueue()
 {
     int temp;
     while (dequeue(&temp))
         ;
 }
-
-/* ---------------- MENU ---------------- */
 
 int main()
 {
